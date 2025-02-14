@@ -1,0 +1,7 @@
+[server]
+enableCORS = false
+[runner]
+magicEnabled = false
+
+[global]
+environmentVariables = ["ACCEPT_EULA=Y"]

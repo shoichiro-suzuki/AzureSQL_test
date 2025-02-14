@@ -1,3 +1,4 @@
+ACCEPT_EULA=Y
+msodbcsql18
 unixodbc
 unixodbc-dev
-msodbcsql18
