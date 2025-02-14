@@ -6,8 +6,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-connection_string = "Driver={ODBC Driver 18 for SQL Server};Server=tcp:mysqlserversuzuki.database.windows.net,1433;Database=mySampleDatabase;Uid=students010@musashiacademy.onmicrosoft.com;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;Authentication=ActiveDirectoryIntegrated"
-
 CONNECTIONSTRING_SQL = os.getenv("CONNECTIONSTRING_SQL")
 CONNECTIONSTRING_ENTRA = os.getenv("CONNECTIONSTRING_ENTRA")
 
@@ -16,7 +14,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 def get_conn():
     try:
-        conn = pyodbc.connect(connection_string)
+        conn = pyodbc.connect(st.session_state.connection_string)
         logging.info("Connection successful")
         return conn
     except pyodbc.Error as e:
