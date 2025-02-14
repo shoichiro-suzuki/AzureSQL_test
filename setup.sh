@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 環境変数を設定してライセンスに自動同意
-export ACCEPT_EULA=Y
+export ACCEPT_EULA=$ACCEPT_EULA
 
 # パッケージリストを更新
 apt-get update 
