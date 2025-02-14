@@ -30,18 +30,20 @@ def create_table():
         cursor = conn.cursor()
         cursor.execute(
             """
-            IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Persons' AND xtype='U')
-            CREATE TABLE Persons (
-                ID int NOT NULL PRIMARY KEY IDENTITY,
-                FirstName varchar(255),
-                LastName varchar(255)
-            );
+            IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Persons')
+            BEGIN
+                CREATE TABLE Persons (
+                    ID INT NOT NULL PRIMARY KEY IDENTITY,
+                    FirstName NVARCHAR(100),
+                    LastName NVARCHAR(100)
+                );
+            END;
         """
         )
         conn.commit()
         return True
     except Exception as e:
-        logging.error(f"Error creating table: {e}")
+        logging.exception("Error creating table")
         return False
     finally:
         if conn:
@@ -54,7 +56,9 @@ def insert_sample_data(first_name, last_name):
         conn = get_conn()
         cursor = conn.cursor()
         cursor.execute(
-            f"INSERT INTO Persons (FirstName, LastName) VALUES ({first_name}, {last_name})"
+            f"INSERT INTO Persons (FirstName, LastName) VALUES (?, ?)",
+            first_name,
+            last_name,
         )
         conn.commit()
         return True
