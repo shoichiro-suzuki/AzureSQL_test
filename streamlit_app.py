@@ -54,9 +54,7 @@ def insert_sample_data(first_name, last_name):
         conn = get_conn()
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO Persons (FirstName, LastName) VALUES (?, ?)",
-            first_name,
-            last_name,
+            f"INSERT INTO Persons (FirstName, LastName) VALUES ({first_name}, {last_name})"
         )
         conn.commit()
         return True
